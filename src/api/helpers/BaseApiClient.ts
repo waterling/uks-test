@@ -74,7 +74,7 @@ class BaseApiClient {
     };
 
     processFailedRequests = (error: AxiosError | null, token: string | null) => {
-        this.failedRequests.map(prom => {
+        this.failedRequests.forEach(prom => {
             if (error) {
                 prom.reject(error);
             } else if (token) {
