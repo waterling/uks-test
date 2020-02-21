@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Route, RouteProps, Redirect } from 'react-router-dom';
 import TokenStorage from '../../helpers/utils/storage/TokenStorage';
 
-const PrivateRoute: React.FC<RouteProps> = (props) => {
-    if (TokenStorage.accessToken) {
+const UnAuthorizeRoute: React.FC<RouteProps> = (props) => {
+    if (!TokenStorage.accessToken) {
         return (
           <Route {...props}>
               {props.children}
@@ -11,7 +11,7 @@ const PrivateRoute: React.FC<RouteProps> = (props) => {
         );
     }
 
-    return <Redirect to='/auth' />;
+    return <Redirect to='/' />;
 };
 
-export default PrivateRoute;
+export default UnAuthorizeRoute;

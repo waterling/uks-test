@@ -1,16 +1,20 @@
 import * as React from 'react';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import SignIn from '../SignIn/SignIn';
 import PrivateRoute from '../Routes/PrivateRoute';
-import AuthPages from '../AuthPages/AuthPages';
+import AuthPages from '../Routes/AuthPages';
+import UnAuthorizeRoute from '../Routes/UnAuthorizeRoute';
+import { connect } from 'react-redux';
+import { IRootState } from '../../store';
 
 const Main: React.FC = () => {
     return (
       <Router>
           <Switch>
-              <Route path='/auth'>
+              <UnAuthorizeRoute path='/auth'>
                   <SignIn/>
-              </Route>
+              </UnAuthorizeRoute>
+
               <PrivateRoute path='/'>
                   <AuthPages/>
               </PrivateRoute>
@@ -19,4 +23,4 @@ const Main: React.FC = () => {
     );
 };
 
-export default Main;
+export default connect(({ auth }: IRootState) => ({token: auth.token}))(Main);

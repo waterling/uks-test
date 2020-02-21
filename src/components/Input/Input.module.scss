@@ -1,0 +1,8 @@
+.input {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  .label {
+    min-width: 10rem;
+  }
+}

@@ -1,8 +1,8 @@
 import BaseApiClient from '../helpers/BaseApiClient';
-import { IAuthToken, LoginForm } from './interfaces';
+import { IAuthToken, ILoginForm } from './interfaces';
 
 class Auth {
-    login = async (data: LoginForm): Promise<IAuthToken> => {
+    login = async (data: ILoginForm): Promise<IAuthToken> => {
         const result = await BaseApiClient.axios.post<IAuthToken>('/auth/login', data);
         return result.data;
     };

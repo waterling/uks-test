@@ -4,11 +4,13 @@ import Home from '../Home/Home';
 
 const AuthPages: React.FC<IProps> = (props) => {
     return (
-      <Switch>
-          <Route path='/'>
-              <Home/>
-          </Route>
-      </Switch>
+      <div>
+          <Switch>
+              <Route path='/'>
+                  <Home/>
+              </Route>
+          </Switch>
+      </div>
     );
 };
 
