@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { ILoginForm } from '../../api/auth/interfaces';
 import { useMemo, useState } from 'react';
-import Form from '../../components/Form/Form';
-import Input from '../../components/Input/Input';
-import Button from '../../components/Button/Button';
+import Form from '../../components/BasicComponents/Form/Form';
+import Input from '../../components/BasicComponents/Input/Input';
+import Button from '../../components/BasicComponents/Button/Button';
 
 import styles from './LoginForm.module.scss';
 
@@ -23,11 +23,13 @@ const LoginForm: React.FC<IProps> = ({ onSubmit }) => {
     return (
       <Form onSubmit={handleSubmit} title='LoginForm' className={styles.loginForm}>
           <Input
+            type='text'
             label='Login'
             value={login}
             onChange={useMemo(() => e => setLogin(e.target.value), [])}
           />
           <Input
+            type='password'
             label='Password'
             value={password}
             onChange={useMemo(() => e => setPassword(e.target.value), [])}
