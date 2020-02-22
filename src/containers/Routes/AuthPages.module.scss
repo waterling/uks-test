@@ -1,0 +1,9 @@
+.authPage {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+
+  .content {
+    padding: 1rem;
+  }
+}

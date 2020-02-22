@@ -1,0 +1,83 @@
+.menu {
+  border-right: solid transparent 1px;
+  box-shadow: 1px 0 0 0 var(--border);
+  width: 18.75rem;
+  background: var(--menu-background);
+
+  * {
+    font-weight: 300;
+    letter-spacing: -0.333333px;
+  }
+
+  li {
+    margin-top: 0.125rem;
+    font-size: 1.125rem;
+    border: solid 1px transparent;
+    width: 100%;
+    list-style-type: none;
+    padding: 4px 0;
+    line-height: 20px;
+
+    & > span {
+      padding-left: 2rem;
+    }
+
+    &.chosen {
+      border-bottom-left-radius: 4px;
+      border-top-left-radius: 4px;
+      border: solid 1px var(--border);
+      border-right: solid 1px var(--menu-background);
+    }
+  }
+}
+
+.navigation {
+  padding-left: 0.3125rem;
+}
+
+.topPart {
+  & > * {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.logoContainer {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
+  span {
+    margin-left: 0.25rem;
+    font-size: 1.125rem;
+    line-height: 20px;
+    color: var(--blue);
+    height: 2rem;
+    width: 5.625rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.userInfo {
+  flex-direction: column;
+
+  & > * {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.125rem;
+  }
+
+  .name {
+    line-height: 1.25rem;
+    font-size: 1.125rem;
+  }
+
+  .email {
+    line-height: 1rem;
+    font-size: 0.875rem;
+  }
+}

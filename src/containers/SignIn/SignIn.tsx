@@ -10,7 +10,7 @@ import { Dispatch, IRootState } from '../../store';
 const SignIn: React.FC<IProps> = ({ login }) => {
     const handleLogin = useMemo(() => (form: ILoginForm) => {
         login(form);
-    }, []);
+    }, [login]);
 
     return (
       <div className={styles.signInPage}>
