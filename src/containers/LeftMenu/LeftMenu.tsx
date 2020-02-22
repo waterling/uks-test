@@ -2,8 +2,10 @@ import * as React from 'react';
 
 import logo from '../../components/icons/logo.svg';
 import styles from './LeftMenu.module.scss';
+import Navigation from '../../components/Navigation/Navigation';
 
 const LeftMenu: React.FC<IProps> = () => {
+
     return (
       <div className={styles.menu}>
           <div className={styles.topPart}>
@@ -17,14 +19,26 @@ const LeftMenu: React.FC<IProps> = () => {
                 <span className={styles.email}>email@mail.ru</span>
               </div>
           </div>
-        <div className={styles.navigation}>
-            <li><span>Профиль</span></li>
-            <li className={styles.chosen}><span>Обращения</span></li>
-            <li><span>Безопасность</span></li>
-        </div>
+
+          <Navigation chosenClassName={styles.chosen} links={links}/>
       </div>
     );
 };
+
+const links = [
+    {
+        url: '/profile',
+        label: 'Профиль'
+    },
+    {
+        url: '/appeal',
+        label: 'Обращения'
+    },
+    {
+        url: '/security',
+        label: 'Безопасность'
+    },
+];
 
 interface IProps {
 }
