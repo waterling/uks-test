@@ -9,10 +9,11 @@ export const user = createModel<UserState>(
           profile: null
       },
       reducers: {
-          setProfile: (profile?: IUserProfile) => {
-              return {
+          setProfile: (state, profile?: IUserProfile) => {
+              return ({
+                  ...state,
                   profile,
-              }
+              });
           }
       },
       effects: dispatch => ({

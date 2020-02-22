@@ -1,22 +1,28 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import logo from '../../components/icons/logo.svg';
 import styles from './LeftMenu.module.scss';
 import Navigation from '../../components/Navigation/Navigation';
+import { IRootState } from '../../store';
+import { connect } from 'react-redux';
 
-const LeftMenu: React.FC<IProps> = () => {
+const LeftMenu: React.FC<IProps> = ({ profile }) => {
 
     return (
       <div className={styles.menu}>
           <div className={styles.topPart}>
-              <div className={styles.logoContainer}>
-                  <img src={logo} alt="logo"/>
-                  <span>BIMDATA</span>
-              </div>
+              <Link to={'/'}>
+                  <div className={styles.logoContainer}>
+                      <img src={logo} alt="logo" />
+                      <span>BIMDATA</span>
+                  </div>
+              </Link>
+
 
               <div className={styles.userInfo}>
-                <span className={styles.name}>Имя Фамилия</span>
-                <span className={styles.email}>email@mail.ru</span>
+                <span className={styles.name}>{profile.firstName} {profile.lastName}</span>
+                <span className={styles.email}>{profile.email}</span>
               </div>
           </div>
 
@@ -40,7 +46,13 @@ const links = [
     },
 ];
 
-interface IProps {
+type connectedProps = ReturnType<typeof mapState>;
+
+const mapState = (state: IRootState) => ({
+    profile: state.user.profile,
+});
+
+interface IProps extends connectedProps{
 }
 
-export default LeftMenu;
+export default connect(mapState)(LeftMenu);

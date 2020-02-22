@@ -26,17 +26,19 @@ class BaseApiClient {
             newConfig.headers = {}
         }
 
-        newConfig.headers['Authorization'] = `Berear ${TokenStorage.accessToken}`;
+        newConfig.headers['Authorization'] = `Bearer ${TokenStorage.accessToken}`;
 
         return newConfig;
     };
 
     private checkAuthFailed = (error: AxiosError) => {
-        if (error.response?.status === 401 && !error.config.headers['_retry']) {
+        if (error.response?.status === 401 && !error.config.timeoutErrorMessage) {
             return this.handleUnAuthorize(error);
         }
-        TokenStorage.clear();
-        window.history.pushState({}, '', '/auth');
+        if (error.response?.status === 401 && error.config.timeoutErrorMessage) {
+            TokenStorage.clear();
+            window.history.pushState({}, '', '/auth');
+        }
         return Promise.reject(error);
     };
 
@@ -53,16 +55,18 @@ class BaseApiClient {
                 return Promise.reject(err);
             })
         }
-        originalRequest.headers['_retry'] = true;
+        originalRequest.timeoutErrorMessage = 'true';
         this.refreshing = true;
         return new Promise((resolve, reject) => {
-            axios.post('/auth/refresh', { refreshToken: TokenStorage.refreshToken })
+            this.axios.get('/auth/refresh', { params: { refresh: TokenStorage.refreshToken } })
             .then(({ data }) => {
                 TokenStorage.set({
                     refreshToken: data.refreshToken,
-                    accessToken: data.token,
+                    accessToken: data.accessToken,
                 });
-                this.processFailedRequests(null, data.token);
+                delete originalRequest.timeoutErrorMessage;
+
+                this.processFailedRequests(null, TokenStorage.accessToken);
                 resolve(this.axios(originalRequest));
             })
             .catch((err) => {

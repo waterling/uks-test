@@ -1,8 +1,13 @@
-.submitButton {
-  margin-left: auto;
-}
-
 .loginForm {
   display: flex;
   flex-direction: column;
+
+  .submitButton {
+    margin-left: auto;
+  }
+}
+
+
+.row {
+  margin: 0.25rem 0;
 }
